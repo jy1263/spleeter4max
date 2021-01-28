@@ -38,8 +38,19 @@ const showDir = (dir) => {
   Max.outlet('set', `Select a clip; then press the button to start.`)
 }
 
+<<<<<<< Updated upstream
 const runSpleeter = (filename) => {
   const cmd = `spleeter separate -i "${filename}" -o "${__dirname}" -p spleeter:4stems-16kHz`
+=======
+const runSpleeter = async (filename) => {
+  const dict = await Max.getDict('main')
+  var fidelity = ''
+  if (dict.fidelity != 'normal') {
+    fidelity = dict.fidelity
+  } 
+
+  const cmd = `spleeter separate -o "${__dirname}" -p spleeter:${dict.model}${fidelity} "${filename}"`
+>>>>>>> Stashed changes
   Max.outlet('set', `Spleeter is running. This may take a minute...`)
   Max.post(cmd)
 
